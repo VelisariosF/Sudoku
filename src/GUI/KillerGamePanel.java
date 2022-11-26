@@ -226,7 +226,7 @@ public class KillerGamePanel extends  GamePanel {
             for(Box box: colorArea.getColorAreaBoxes()){
                 int i = box.getBoxCoordinateI(), j = box.getBoxCoordinateJ();
                 box.setBoxValue(killerSudoku.getBoard()[i][j]);
-                box.setNotEmpty(true);
+                box.setEmpty(true);
                 sum = killerSudoku.checkIfTheSumIsValid(killerSudoku.checkColorArea(i,j));
                 int row = killerSudoku.getColorAreas().get(killerSudoku.checkColorArea(i, j)).getColorAreaBoxes().get(0).getBoxCoordinateI();
                 int col = killerSudoku.getColorAreas().get(killerSudoku.checkColorArea(i, j)).getColorAreaBoxes().get(0).getBoxCoordinateJ();

@@ -13,7 +13,7 @@ public class Box {
      */
     private  int coordinateI ,coordinateJ;//Each box has its own coordinates i,j; that reprsent its position in the
     private int boxValue;                       //field.Als it
-    private boolean notEmpty;//if there is no value in the box then notEmpty = false
+    private boolean empty;//if there is no value in the box then notEmpty = false
 
     /**
      * Empty constructor that creates a box object.
@@ -32,7 +32,7 @@ public class Box {
         this.coordinateI = i;
         this.coordinateJ = j;
         this.boxValue = aValue;
-        this.notEmpty = false;
+        this.empty = true;
     }
 
     /**
@@ -73,16 +73,16 @@ public class Box {
      * The getNotEmpty method returns whether or not a box is empty(has no value).
      * @return boolean This returns true if a box has a value in it or false otherwise.
      */
-    public boolean getNotEmpty(){
-        return this.notEmpty;
+    public boolean isEmpty(){
+        return this.empty;
     }
 
     /**
      * The setNotEmpty method is used to make a box empty or not.
      * @param k This parameter tells if the specific box must be turned empty or not.
      */
-    public void setNotEmpty(boolean k){
-        this.notEmpty = k;
+    public void setEmpty(boolean k){
+        this.empty = k;
 
     }
 }

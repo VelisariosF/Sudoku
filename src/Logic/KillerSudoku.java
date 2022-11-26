@@ -16,11 +16,11 @@ public class KillerSudoku extends SudokuLogic {
      * in order to initialize the killerPuzzles ArrayLists and the KillerSudoku class has an ArrayList of ColorArea called ColorAreas which basically is
      * holds all the color areas that will be shown on the panel of the killer sudoku version.
      */
-    private ArrayList<ColorArea> ColorAreas;
-    private ArrayList<Character>[] killerPuzzles = new ArrayList[10];
-    private ArrayList<Integer> availableKillerPuzzles;
-    private Initialize initialize;
+    private final ArrayList<ColorArea> colorAreas;
+    private final ArrayList<Character>[] killerPuzzles;
+    private final ArrayList<Integer> availableKillerPuzzles;
     private int killerPuzzle;
+    private static final Random RANDOM = new Random();
 
     /**
      * The KillerSudoku constructor gets the user as parameter in order to save their statistics for the game (if it isn't a guest player).Also it creates a two dimensional
@@ -32,9 +32,9 @@ public class KillerSudoku extends SudokuLogic {
      */
     public KillerSudoku(User aUser){
         super(9);
-        initialize = new Initialize(false, true);
+        Initialize initialize = new Initialize(false, true);
         setUser(aUser);
-        ColorAreas = new ArrayList<>();
+        colorAreas = new ArrayList<>();
         availableKillerPuzzles = new ArrayList<>();
         for(int i = 0; i < 10; i++){
             availableKillerPuzzles.add(i);
@@ -56,7 +56,7 @@ public class KillerSudoku extends SudokuLogic {
      * @return ArrayList This returns the ColorAreas ArrayList.
      */
     public ArrayList<ColorArea> getColorAreas() {
-        return ColorAreas;
+        return colorAreas;
     }
 
     /**
@@ -68,7 +68,7 @@ public class KillerSudoku extends SudokuLogic {
      *                  or not.
      */
     public void setKillerColorAreaBoxValue(int row, int col, int value, boolean notEmpty) {
-        ColorArea colorArea = ColorAreas.get(checkColorArea(row, col));
+        ColorArea colorArea = colorAreas.get(checkColorArea(row, col));
         for (int j = 0; j < colorArea.getColorAreaSize(); j++) {
             if (colorArea.getColorAreaBox(j).getBoxCoordinateI() == row && colorArea.getColorAreaBox(j).getBoxCoordinateJ() == col) {
                 colorArea.setColorAreaBoxValue(j, value, colorArea.getColorAreaBox(j));
@@ -82,7 +82,7 @@ public class KillerSudoku extends SudokuLogic {
      * @return int This returns the size of the ColorAreas ArrayList.
      */
     public int getColorAreasSize(){
-        return ColorAreas.size();
+        return colorAreas.size();
     }
 
     /**
@@ -90,9 +90,8 @@ public class KillerSudoku extends SudokuLogic {
      * based on the random puzzle that has been selected.
      */
     public void chooseRandomKillerPuzzle(){
-        Random r = new Random();
-        int kK = r.nextInt(availableKillerPuzzles.size()), j = 0;
-        killerPuzzle = availableKillerPuzzles.get(kK);
+        int  j = 0;
+        killerPuzzle = availableKillerPuzzles.get(RANDOM.nextInt(availableKillerPuzzles.size()));
         ColorArea aColorArea;
         StringBuilder color;
         String sColor;
@@ -117,7 +116,7 @@ public class KillerSudoku extends SudokuLogic {
 
             sColor = color.toString();
             aColorArea.setColorAreaColor(sColor);
-            this.ColorAreas.add(aColorArea);
+            this.colorAreas.add(aColorArea);
         }
     }
 
@@ -129,8 +128,8 @@ public class KillerSudoku extends SudokuLogic {
      */
     public int checkColorArea(int row, int col){
         int colorAreaPos = 0;
-        for(int i = 0 ; i < ColorAreas.size(); i ++){
-            ColorArea colorArea = ColorAreas.get(i);
+        for(int i = 0; i < colorAreas.size(); i ++){
+            ColorArea colorArea = colorAreas.get(i);
             for(int j = 0; j < colorArea.getColorAreaSize(); j++ ){
                 if(colorArea.getColorAreaBox(j).getBoxCoordinateI() == row && colorArea.getColorAreaBox(j).getBoxCoordinateJ() == col){
                     colorAreaPos = i;
@@ -146,8 +145,8 @@ public class KillerSudoku extends SudokuLogic {
      * @return boolean This returns true if the sum of the values is equal to the sum of the color area and false otherwise.
      */
     public boolean checkIfTheSumIsValid(int colorAreaPos){
-        if(ColorAreas.get(colorAreaPos).checkIfColorAreaIsFull()){
-            return ColorAreas.get(colorAreaPos).checkSumOfBoxes();
+        if(colorAreas.get(colorAreaPos).colorAreaIsFull()){
+            return colorAreas.get(colorAreaPos).checkSumOfBoxes();
         }
         return false;
     }
@@ -168,7 +167,7 @@ public class KillerSudoku extends SudokuLogic {
      */
     public boolean checkWinner(){
         int s = 0;
-        for(ColorArea c : ColorAreas){
+        for(ColorArea c : colorAreas){
             if(c.checkSumOfBoxes())
                 s++;
         }
@@ -201,6 +200,6 @@ public class KillerSudoku extends SudokuLogic {
      * @param aColorArea This parameter is the color area to be added to the color areas of the killer Sudoku.
      */
     public void addColorAreaToKillerColorAreas(ColorArea aColorArea){
-        ColorAreas.add(aColorArea);
+        colorAreas.add(aColorArea);
     }
 }

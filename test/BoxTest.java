@@ -25,7 +25,7 @@ public class BoxTest {
     @Test
     public void getNotEmpty() {
         Box box = new Box(2, 3, 12);
-        assertEquals(false, box.getNotEmpty());
+        assertEquals(false, box.isEmpty());
     }
 
     @Test

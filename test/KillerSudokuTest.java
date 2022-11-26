@@ -80,17 +80,17 @@ public class KillerSudokuTest {
     void checkIfTheSumIsValid() {
         User user = new User("David");
         Box box11 = new Box(1,1,11);
-        box11.setNotEmpty(true);
+        box11.setEmpty(true);
         Box box12 = new Box(1,2,12);
-        box12.setNotEmpty(true);
+        box12.setEmpty(true);
         Box box13 = new Box(1,3,13);
-        box13.setNotEmpty(true);
+        box13.setEmpty(true);
         Box box21 = new Box(2,1,21);
-        box21.setNotEmpty(true);
+        box21.setEmpty(true);
         Box box22 = new Box(2,2,22);
-        box22.setNotEmpty(true);
+        box22.setEmpty(true);
         Box box23 = new Box(2,3,23);
-        box23.setNotEmpty(true);
+        box23.setEmpty(true);
         ColorArea colorArea1 = new ColorArea();
         ColorArea colorArea2 = new ColorArea();
         colorArea1.addBox(box11);

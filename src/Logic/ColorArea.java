@@ -1,6 +1,7 @@
 package Logic;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The ColorArea class implements one of the killer Sudoku color areas.
@@ -13,7 +14,7 @@ public class ColorArea {
      * stored in the sum and color variables respectively.The color variable helps us to distinguish this color area from other color areas
      * when they appear on the panel of the killer sudoku.
      */
-    private ArrayList<Box> ColorAreaBoxes;
+    private final ArrayList<Box> colorAreaBoxes;
     private int sum ;
     private String color;
 
@@ -21,7 +22,7 @@ public class ColorArea {
      * ColorArea constructor that creates a new color area with an empty ArrayList of boxes.
      */
     public ColorArea(){
-        ColorAreaBoxes = new ArrayList<>();
+        colorAreaBoxes = new ArrayList<>();
     }
 
     /**
@@ -29,15 +30,15 @@ public class ColorArea {
      * @param box This parameter is the box to be added into the ColorAreaBoxes ArrayList.
      */
     public void addBox(Box box){
-        ColorAreaBoxes.add(box);
+        colorAreaBoxes.add(box);
     }
 
     /**
      * This method returns all the boxes that belong to this specific color area.
      * @return ArrayList This returns the color area's ArrayList of boxes.
      */
-    public ArrayList<Box> getColorAreaBoxes() {
-        return ColorAreaBoxes;
+    public List<Box> getColorAreaBoxes() {
+        return colorAreaBoxes;
     }
 
     /**
@@ -46,7 +47,7 @@ public class ColorArea {
      * @return Box This returns a box that that belongs to this specific color area.
      */
     public Box getColorAreaBox(int boxPos){
-        return ColorAreaBoxes.get(boxPos);
+        return colorAreaBoxes.get(boxPos);
     }
 
     /**
@@ -57,7 +58,7 @@ public class ColorArea {
      */
     public void setColorAreaBoxValue(int boxPosition, int value, Box box){
         box.setBoxValue(value);
-        ColorAreaBoxes.set(boxPosition, box);
+        colorAreaBoxes.set(boxPosition, box);
     }
 
     /**
@@ -67,8 +68,8 @@ public class ColorArea {
      * @param box         This parameter is the box to which the notEmpty variable should be changed.
      */
     public void setColorAreaBoxNotEmptyVariable(int boxPosition, boolean k, Box box){
-        box.setNotEmpty(k);
-        ColorAreaBoxes.set(boxPosition, box);
+        box.setEmpty(k);
+        colorAreaBoxes.set(boxPosition, box);
     }
 
     /**
@@ -76,7 +77,7 @@ public class ColorArea {
      * @return int This returns the size of the color area.
      */
     public int getColorAreaSize(){
-        return ColorAreaBoxes.size();
+        return colorAreaBoxes.size();
     }
 
     /**
@@ -99,9 +100,10 @@ public class ColorArea {
      */
     public int getSumOfBoxes(){
         int sumOfBoxes = 0;
-        for(int i = 0; i < ColorAreaBoxes.size(); i++){
-            if(ColorAreaBoxes.get(i).getBoxValue() > 0) {
-                sumOfBoxes = sumOfBoxes + ColorAreaBoxes.get(i).getBoxValue();
+
+        for (Box colorAreaBox : colorAreaBoxes) {
+            if (colorAreaBox.getBoxValue() > 0) {
+                sumOfBoxes = sumOfBoxes + colorAreaBox.getBoxValue();
             }
         }
 
@@ -109,29 +111,25 @@ public class ColorArea {
     }
 
     /**
-     * This method checks if the sum of the values of every box insidet the color area is equal to the sum that the colorArea should have.
+     * This method checks if the sum of the values of every box inside the color area is equal to the sum that the colorArea should have.
      * @return boolean This returns true if the sum of the values of all the boxes is equal to to the sum that the colorArea should have.
      */
     public boolean checkSumOfBoxes(){
-        if(this.getSumOfBoxes() == this.sum)
-            return true;
-        return false;
+        return this.getSumOfBoxes() == this.sum;
     }
 
     /**
      * This method checks if the color area is full.A color area is full if every box, that exists in it, is not empty.
      * @return boolean This returns true if the specific color area is full.
      */
-    public boolean checkIfColorAreaIsFull(){
-        boolean full = true;
-        for(int i = 0; i < ColorAreaBoxes.size(); i++){
-            if(!ColorAreaBoxes.get(i).getNotEmpty()){
-                full = false;
-                break;
+    public boolean colorAreaIsFull(){
+        for (Box colorAreaBox : colorAreaBoxes) {
+            if (colorAreaBox.isEmpty()) {
+                return false;
             }
         }
-        return full;
 
+        return true;
     }
 
     /**

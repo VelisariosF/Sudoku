@@ -84,11 +84,11 @@ public class ColorAreaTest {
         colorArea.addBox(box1);
         colorArea.addBox(box2);
         colorArea.addBox(box3);
-        box1.setNotEmpty(true);
-        box2.setNotEmpty(true);
-        box3.setNotEmpty(true);
-        assertEquals(true, colorArea.checkIfColorAreaIsFull());
-        box2.setNotEmpty(false);
-        assertEquals(false, colorArea.checkIfColorAreaIsFull());
+        box1.setEmpty(true);
+        box2.setEmpty(true);
+        box3.setEmpty(true);
+        assertEquals(true, colorArea.colorAreaIsFull());
+        box2.setEmpty(false);
+        assertEquals(false, colorArea.colorAreaIsFull());
     }
 }
