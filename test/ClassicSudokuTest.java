@@ -1,4 +1,4 @@
-import Logic.*;
+import logic.*;
 import org.junit.jupiter.api.Test;
 
 
